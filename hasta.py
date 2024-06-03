@@ -1,0 +1,2 @@
+class Hasta:
+    pass
