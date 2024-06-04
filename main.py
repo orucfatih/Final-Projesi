@@ -6,4 +6,3 @@ from hasta import Hasta
 def main():
     pass
 
-main()

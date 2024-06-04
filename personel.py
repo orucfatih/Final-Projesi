@@ -21,7 +21,7 @@ class Personel:
     def get_maas(self):
         return self.__maas
     
-    def set_personel_no(self, personel_no):
+    def set_personel_no(self, personel_no):     #metot olarak istenen bu mu?
         self.__personel_no = personel_no
     
     def set_ad(self, ad):
