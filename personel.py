@@ -37,12 +37,11 @@ class Personel:
         self.__maas = maas
 
     def __str__(self):
-        print("----- Personel Bilgileri -----")
-        print("Personel no: "+ self.get_personel_no())
-        print("Ad: "+self.get_ad())
-        print("Soyad: "+self.get_soyad())
-        print("Departman: "+self.get_departman())
-        print("Maas: "+self.get_maas())
-        print("------------------------------")
-        
+        return (f"----- Personel Bilgileri -----"
+                f"Personel no: {self.get_personel_no()}"
+                f"Ad: {self.get_ad()}"
+                f"Soyad: {self.get_soyad()}"
+                f"Departman: {self.get_departman()}"
+                f"Maas: {self.get_maas()}"
+                f"------------------------------")
     

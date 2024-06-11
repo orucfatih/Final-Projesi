@@ -44,14 +44,29 @@ class Hasta:
         self.__tedavi = tedavi
 
     def tedavi_suresi_hesapla(self):
-        pass
+        if self.__hastalik.strip.lower() == "grip":
+            katsayi = 1
+        elif self.__hastalik.strip.lower() == "yaralanma":
+            katsayi = 2
+        elif self.__hastalik.strip.lower() == "tansiyon":
+            katsayi = 1
+        else:
+            katsayi = 1
+
+        if self.__tedavi.strip.lower() == "evde":
+            sure = katsayi * 2
+        elif self.__tedavi.strip.lower() == "yatarak":
+            sure = katsayi
+
+        return sure
 
     def __str__(self):
-        print("-----Hasta Bilgileri-----")
-        print("Hasta no: "+ self.get_hasta_no())
-        print("Ad: "+self.get_ad())
-        print("Soyad: "+self.get_soyad())
-        print("Dogum tarihi: "+self.get_dogum_tarihi())
-        print("Hastalik: "+self.get_hastalik())            #tedavi süresi
-        print("Tedavi: "+self.get_tedavi())
-        print("-------------------------")
+        return (f"-----Hasta Bilgileri-----\n"
+                f"Hasta no: {self.get_hasta_no()}\n"
+                f"Ad: {self.get_ad()}\n"
+                f"Soyad: {self.get_soyad()}\n"
+                f"Dogum tarihi: {self.get_dogum_tarihi()}\n"
+                f"Hastalik: {self.get_hastalik()}\n"
+                f"Tedavi: {self.get_tedavi()}\n"
+                f"Tedavi suresi: {self.tedavi_suresi_hesapla()}"
+                f"-------------------------")

@@ -32,13 +32,13 @@ class Doktor(Personel):
         self.__maas = self.__maas * self.zam_orani
 
     def __str__(self):
-        print("----- Doktor Bilgileri -----")
-        print("Personel no: "+ self.get_personel_no())
-        print("Ad: "+self.get_ad())
-        print("Soyad: "+self.get_soyad())
-        print("Departman: "+self.get_departman())
-        print("Maas: "+self.get_maas())
-        print("Uzmanlik: "+self.get_uzmanlik())
-        print("Deneyim yili: "+self.get_deneyim_yili())
-        print("Hastane: "+ self.get_hastane())
-        print("------------------------------")
+        return (f"----- Doktor Bilgileri -----\n"
+                f"Personel no: {self.get_personel_no()}\n"
+                f"Ad: {self.get_ad()}\n"
+                f"Soyad: {self.get_soyad()}\n"
+                f"Departman: {self.get_departman()}\n"
+                f"Maas: {self.get_maas()}\n"
+                f"Uzmanlik: {self.get_uzmanlik()}\n"
+                f"Deneyim yili: {self.get_deneyim_yili()}\n"
+                f"Hastane: {self.get_hastane()}\n"
+                f"------------------------------")
