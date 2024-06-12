@@ -139,26 +139,50 @@ def goruntule():
 
 def dataframe():
     tum_nesneler = personeller + doktorlar + hemsireler + hastalar 
-    data = {'sinif': [type(obj).__name__ for obj in tum_nesneler],
-    'personel_no': [obj.get_personel_no() if hasattr(obj, 'get_personel_no') else None for obj in tum_nesneler],
-    'ad': [obj.get_ad() for obj in tum_nesneler],
-    'soyad': [obj.get_soyad() for obj in tum_nesneler],
-    'departman': [obj.get_departman() if hasattr(obj, 'get_departman') else None for obj in tum_nesneler],
-    'maas': [obj.get_maas() if hasattr(obj, 'get_maas') else None for obj in tum_nesneler],
-    'uzmanlik': [obj.get_uzmanlik() if hasattr(obj, 'get_uzmanlik') else None for obj in tum_nesneler],
-    'deneyim_yili': [obj.get_deneyim_yili() if hasattr(obj, 'get_deneyim_yili') else None for obj in tum_nesneler],
-    'hastane': [obj.get_hastane() if hasattr(obj, 'get_hastane') else None for obj in tum_nesneler],
-    'calisma_saati': [obj.get_calisma_saati() if hasattr(obj, 'get_calisma_saati') else None for obj in tum_nesneler],
-    'sertifika': [obj.get_sertifika() if hasattr(obj, 'get_sertifika') else None for obj in tum_nesneler],
-    'hasta_no': [obj.get_hasta_no() if hasattr(obj, 'get_hasta_no') else None for obj in tum_nesneler],
-    'dogum_tarihi': [obj.get_dogum_tarihi() if hasattr(obj, 'get_dogum_tarihi') else None for obj in tum_nesneler],
-    'hastalik': [obj.get_hastalik() if hasattr(obj, 'get_hastalik') else None for obj in tum_nesneler],
-    'tedavi': [obj.get_tedavi() if hasattr(obj, 'get_tedavi') else None for obj in tum_nesneler]}
+    if tum_nesneler == []:
+        print("Goruntulencek veri yok.")
+    else:
+        data = {'sinif': [type(obj).__name__ for obj in tum_nesneler],
+        'personel_no': [obj.get_personel_no() if hasattr(obj, 'get_personel_no') else None for obj in tum_nesneler],
+        'ad': [obj.get_ad() for obj in tum_nesneler],
+        'soyad': [obj.get_soyad() for obj in tum_nesneler],
+        'departman': [obj.get_departman() if hasattr(obj, 'get_departman') else None for obj in tum_nesneler],
+        'maas': [obj.get_maas() if hasattr(obj, 'get_maas') else None for obj in tum_nesneler],
+        'uzmanlik': [obj.get_uzmanlik() if hasattr(obj, 'get_uzmanlik') else None for obj in tum_nesneler],
+        'deneyim_yili': [obj.get_deneyim_yili() if hasattr(obj, 'get_deneyim_yili') else None for obj in tum_nesneler],
+        'hastane': [obj.get_hastane() if hasattr(obj, 'get_hastane') else None for obj in tum_nesneler],
+        'calisma_saati': [obj.get_calisma_saati() if hasattr(obj, 'get_calisma_saati') else None for obj in tum_nesneler],
+        'sertifika': [obj.get_sertifika() if hasattr(obj, 'get_sertifika') else None for obj in tum_nesneler],
+        'hasta_no': [obj.get_hasta_no() if hasattr(obj, 'get_hasta_no') else None for obj in tum_nesneler],
+        'dogum_tarihi': [obj.get_dogum_tarihi() if hasattr(obj, 'get_dogum_tarihi') else None for obj in tum_nesneler],
+        'hastalik': [obj.get_hastalik() if hasattr(obj, 'get_hastalik') else None for obj in tum_nesneler],
+        'tedavi': [obj.get_tedavi() if hasattr(obj, 'get_tedavi') else None for obj in tum_nesneler]}
 
-    df = pd.DataFrame(data)
-    df = df.fillna(0)
-    print(df.to_string())
-    
+        df = pd.DataFrame(data)
+        df = df.fillna(0).astype(object)
+        print(df.to_string())
+        
+        doktor_df = df[df['sinif'] == 'Doktor']  # Yalnızca doktorları filtreleme
+        uzmanlik_grup = doktor_df.groupby('uzmanlik').size()
+        print(f"Uzmanliklarina gore doktorlar:\n {uzmanlik_grup}")
+
+        deneyimli_doktorlar = doktor_df[doktor_df['deneyim_yili'] > 5]
+        print(f"Deneyimli doktor sayisi: {len(deneyimli_doktorlar)}")
+
+        hasta_df = df[df['sinif'] == 'Hasta']  # Yalnızca hastaları filtreleme
+        sorted_hasta_df = hasta_df.sort_values(by='ad')
+        print(f"Hastalar:\n {sorted_hasta_df}")
+
+        maas_ustu_personeller = df[df['maas'] > 7000]
+        print(f"Yuksek maasli personeller:\n {maas_ustu_personeller}")
+
+        dogum_1990_sonrasi = hasta_df[pd.to_datetime(hasta_df['dogum_tarihi']) >= '1990-01-01']
+        print(f"35 yasindan buyuk hastalar:\n {dogum_1990_sonrasi}")
+
+        yeni_df = df[['sinif','ad', 'soyad', 'departman', 'maas', 'uzmanlik', 'deneyim_yili', 'hastalik', 'tedavi']]
+        print(yeni_df)
+
+
 
 def main():
     while True:
