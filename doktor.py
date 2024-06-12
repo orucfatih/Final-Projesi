@@ -41,4 +41,4 @@ class Doktor(Personel):
                 f"Uzmanlik: {self.get_uzmanlik()}\n"
                 f"Deneyim yili: {self.get_deneyim_yili()}\n"
                 f"Hastane: {self.get_hastane()}\n"
-                f"------------------------------")
+                f"------------------------------ \n")

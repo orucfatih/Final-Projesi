@@ -68,5 +68,5 @@ class Hasta:
                 f"Dogum tarihi: {self.get_dogum_tarihi()}\n"
                 f"Hastalik: {self.get_hastalik()}\n"
                 f"Tedavi: {self.get_tedavi()}\n"
-                f"Tedavi suresi: {self.tedavi_suresi_hesapla()}"
-                f"-------------------------")
+                f"Tedavi suresi: {self.tedavi_suresi_hesapla()} \n"
+                f"------------------------- \n")

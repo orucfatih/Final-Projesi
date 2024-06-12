@@ -41,4 +41,4 @@ class Hemsire(Personel):
                 f"Calisma saati: {self.get_calisma_saati()}\n"
                 f"Sertifika: {self.get_sertifika()}\n"
                 f"Hastane: {self.get_hastane()}\n"
-                f"------------------------------")
+                f"------------------------------ \n")
