@@ -3,6 +3,9 @@ from hemsire import Hemsire
 from doktor import Doktor
 from hasta import Hasta
 import pandas as pd
+import numpy as np
+
+pd.set_option('future.no_silent_downcasting', True)
 
 personeller = []
 doktorlar = []
@@ -159,11 +162,14 @@ def dataframe():
         'tedavi': [obj.get_tedavi() if hasattr(obj, 'get_tedavi') else None for obj in tum_nesneler]}
 
         df = pd.DataFrame(data)
-        df = df.fillna(0).astype(object)
-        print(df.to_string())
+        df = df.fillna(0)
+        df.infer_objects(copy=False)
+        print(df)
         
         doktor_df = df[df['sinif'] == 'Doktor']  # Yalnızca doktorları filtreleme
         uzmanlik_grup = doktor_df.groupby('uzmanlik').size()
+        uzmanlik_grup = uzmanlik_grup.fillna(0)
+        uzmanlik_grup.infer_objects(copy=False)
         print(f"Uzmanliklarina gore doktorlar:\n {uzmanlik_grup}")
 
         deneyimli_doktorlar = doktor_df[doktor_df['deneyim_yili'] > 5]
@@ -171,17 +177,24 @@ def dataframe():
 
         hasta_df = df[df['sinif'] == 'Hasta']  # Yalnızca hastaları filtreleme
         sorted_hasta_df = hasta_df.sort_values(by='ad')
+        sorted_hasta_df = sorted_hasta_df.fillna(0)
+        sorted_hasta_df.infer_objects(copy=False)
         print(f"Hastalar:\n {sorted_hasta_df}")
 
         maas_ustu_personeller = df[df['maas'] > 7000]
+        maas_ustu_personeller = maas_ustu_personeller.fillna(0)
+        maas_ustu_personeller.infer_objects(copy=False)
         print(f"Yuksek maasli personeller:\n {maas_ustu_personeller}")
 
         dogum_1990_sonrasi = hasta_df[pd.to_datetime(hasta_df['dogum_tarihi']) >= '1990-01-01']
+        dogum_1990_sonrasi = dogum_1990_sonrasi.fillna(0)
+        dogum_1990_sonrasi.infer_objects(copy=False)
         print(f"35 yasindan buyuk hastalar:\n {dogum_1990_sonrasi}")
 
         yeni_df = df[['sinif','ad', 'soyad', 'departman', 'maas', 'uzmanlik', 'deneyim_yili', 'hastalik', 'tedavi']]
+        yeni_df = yeni_df.fillna(0)
+        yeni_df.infer_objects(copy=False)
         print(yeni_df)
-
 
 
 def main():

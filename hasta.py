@@ -44,18 +44,21 @@ class Hasta:
         self.__tedavi = tedavi
 
     def tedavi_suresi_hesapla(self):
-        if self.__hastalik.strip.lower() == "grip":
+        tedavi = self.__tedavi.strip().lower()
+        hastalik = self.__hastalik.strip().lower()
+
+        if hastalik == "grip":
             katsayi = 1
-        elif self.__hastalik.strip.lower() == "yaralanma":
+        elif hastalik == "yaralanma":
             katsayi = 2
-        elif self.__hastalik.strip.lower() == "tansiyon":
+        elif hastalik == "tansiyon":
             katsayi = 1
         else:
             katsayi = 1
 
-        if self.__tedavi.strip.lower() == "evde":
+        if tedavi == "evde":
             sure = katsayi * 2
-        elif self.__tedavi.strip.lower() == "yatarak":
+        elif tedavi == "yatarak":
             sure = katsayi
 
         return sure
@@ -68,5 +71,5 @@ class Hasta:
                 f"Dogum tarihi: {self.get_dogum_tarihi()}\n"
                 f"Hastalik: {self.get_hastalik()}\n"
                 f"Tedavi: {self.get_tedavi()}\n"
-                f"Tedavi suresi: {self.tedavi_suresi_hesapla()} \n"
+                f"Tedavi suresi: {self.tedavi_suresi_hesapla()} gun \n"
                 f"------------------------- \n")
